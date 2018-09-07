@@ -10,8 +10,16 @@ module Types
       argument :id, ID, required: true
     end
 
+    field :all_links, [Types::Link], null: false do
+      description 'Find all links'
+    end
+
     def link(id:)
       ::Link.find(id)
+    end
+
+    def all_links
+      ::Link.all
     end
   end
 end

@@ -2,4 +2,5 @@
 
 class GraphqlTutorialSchema < GraphQL::Schema
   query Types::Query
+  mutation Types::Mutation
 end
