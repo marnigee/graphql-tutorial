@@ -22,7 +22,7 @@ module Mutations
       ::User.create!(
         name: name,
         email: auth_provider.first.email.email,
-        password: auth_provider.first.email.password.to_s)
+        password: auth_provider.first.email.password)
     end
   end
 end
