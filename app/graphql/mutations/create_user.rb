@@ -2,13 +2,8 @@
 
 module Mutations
   class CreateUser < GraphQL::Schema::Mutation
-    class AuthProviderEmailInput < GraphQL::Schema::InputObject
-      argument :email, String, required: true
-      argument :password, String, required: true
-    end
-
     class AuthProviderInput < GraphQL::Schema::InputObject
-      argument :email, AuthProviderEmailInput, required: true
+      argument :email, Types::AuthProviderEmailInput, required: true
     end
 
     argument :name, String, required: true
@@ -18,11 +13,11 @@ module Mutations
     field :email, String, null:false
     field :id, ID, null:false
 
-    def resolve(name:, auth_provider:)
+    def resolve(params)
       ::User.create!(
-        name: name,
-        email: auth_provider.first.email.email,
-        password: auth_provider.first.email.password)
+        name: params[:name],
+        email: params[:auth_provider].first.email.email,
+        password: params[:auth_provider].first.email.password)
     end
   end
 end
